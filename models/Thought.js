@@ -1,34 +1,40 @@
-const { Schema, Types } = require("mongoose");
+const { Schema, model } = require("mongoose");
 const reactionSchema = require("./Reaction");
 
-const assignmentSchema = new Schema(
+const thoughtSchema = new Schema(
   {
     thoughtText: {
-      type: Schema.Types.ObjectId,
-      default: () => new Types.ObjectId(),
-    },
-    assignmentName: {
       type: String,
       required: true,
-      maxlength: 50,
-      minlength: 4,
-      default: "Unnamed assignment",
-    },
-    score: {
-      type: Number,
-      required: true,
-      default: () => Math.floor(Math.random() * (100 - 70 + 1) + 70),
+      minLength: 1,
+      maxLength: 280,
     },
     createdAt: {
       type: Date,
       default: Date.now,
+      // Is this what we need to do for
+      // Use a getter method to format the timestamp on query
+      get: function () {
+        return Date.now.toLocaleString();
+      },
     },
+    username: {
+      type: String,
+      required: true,
+    },
+    reactions: [reactionSchema],
   },
   {
     toJSON: {
-      getters: true,
+      virtuals: true,
     },
   }
 );
 
-module.exports = assignmentSchema;
+thoughtSchema.virtual("reactionCount").get(function () {
+  return `${this.reactions.length} Reactions`;
+});
+
+const Thought = model("thought", thoughtSchema);
+
+module.exports = Thought;
