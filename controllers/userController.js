@@ -63,6 +63,21 @@ module.exports = {
     }
   },
 
+  // Update a user
+  async updateUser(req, res) {
+    try {
+      const user = await User.findOneAndUpdate({ _id: req.params.userId }, { $set: req.body }, { runValidators: true, new: true });
+
+      if (!user) {
+        return res.status(404).json({ message: "No user with this id!" });
+      }
+
+      res.json(course);
+    } catch (err) {
+      res.status(500).json(err);
+    }
+  },
+
   // Add an assignment to a student
   async addFriend(req, res) {
     try {
