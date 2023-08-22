@@ -1,6 +1,6 @@
 const connection = require("../config/connection");
 const { User, Thought } = require("../models");
-const { getRandomName, getRandomThoughts, getRandomFriends, getRandomrReactions } = require("./data");
+const { getRandomName, emails, getRandomThoughts, getRandomReactions, usernames } = require("./data");
 
 connection.on("error", (err) => err);
 
@@ -18,27 +18,25 @@ connection.once("open", async () => {
 
   // Loop 20 times -- add users to the users array
   for (let i = 0; i < 20; i++) {
-    const usernames = getRandomName();
-
-    users.push({
-      usernames,
-    });
+    users.push(usernames[i]);
   }
 
   // Add students to the collection and await the results
-  await User.collection.insertMany(users);
+  for (let i = 0; i < 20; i++) {
+    await User.collection.insertOne({ username: users[i], email: emails[i] });
+  }
 
   // Add courses to the collection and await the results
   for (let i = 0; i < 20; i++) {
     await Thought.collection.insertOne({
       thoughtText: getRandomThoughts(),
-      username: users[i],
-      reactions: getRandomrReactions(),
+      username: users[Math.floor(Math.random() * users.length)],
+      reactions: getRandomReactions(),
     });
   }
 
   // Log out the seed data to indicate what should appear in the database
-  console.table(students);
+  console.table(usernames);
   console.info("Seeding complete! 🌱");
   process.exit(0);
 });

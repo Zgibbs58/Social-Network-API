@@ -21,7 +21,7 @@ const usernames = [
   "emberHeart",
 ];
 
-const Thoughts = [
+const thoughts = [
   "Lost in thought, finding my way back.",
   "If words were colors, my mind would be a painting.",
   "Chasing dreams in a world of whispers.",
@@ -49,42 +49,48 @@ const reactions = [
   "Reply: The side effects of in app purchases on digital marketplaces",
 ];
 
+const emails = [
+  "user1@example.com",
+  "testuser123@gmail.com",
+  "john.doe@mailinator.com",
+  "alice.smith@yahoo.com",
+  "jackson1985@hotmail.com",
+  "sarah.jones@outlook.com",
+  "samwilson2000@fakemail.net",
+  "emily.brown@protonmail.com",
+  "alex.carter@gmail.com",
+  "lisa.miller@example.net",
+  "chris.evans@mail.com",
+  "jennifer1998@yahoo.com",
+  "david.jackson@myemail.org",
+  "anna.rodriguez@webmail.co",
+  "kevin.walker@fakemail.com",
+  "olivia.green@gmail.com",
+  "eric.johnson@demoemail.net",
+  "melissa.smith@randommail.org",
+  "jacob.miller@hotmail.com",
+  "grace.parker@mailinator.net",
+];
+
 // Get a random item given an array
 const getRandomArrItem = (arr) => arr[Math.floor(Math.random() * arr.length)];
 
 // Gets a random full name
-const getRandomName = () => `${getRandomArrItem(usernames)}}`;
+const getRandomName = () => {
+  const randomUsername = getRandomArrItem(usernames);
+  return randomUsername;
+};
 
 // Function to generate random assignments that we can add to student object.
-const getRandomThoughts = (int) => {
-  const results = [];
-  for (let i = 0; i < int; i++) {
-    results.push({
-      thoughts: getRandomArrItem(Thoughts),
-    });
-  }
-  return results;
+const getRandomThoughts = () => {
+  const randomThought = getRandomArrItem(thoughts);
+  return randomThought;
 };
 
-const getRandomFriends = (int) => {
-  const results = [];
-  for (let i = 0; i < int; i++) {
-    results.push({
-      thoughts: getRandomArrItem(usernames),
-    });
-  }
-  return results;
-};
-
-const getRandomrReactions = (int) => {
-  const results = [];
-  for (let i = 0; i < int; i++) {
-    results.push({
-      thoughts: getRandomArrItem(reactions),
-    });
-  }
-  return results;
+const getRandomReactions = (int) => {
+  const randomReactions = getRandomArrItem(reactions);
+  return randomReactions;
 };
 
 // Export the functions for use in seed.js
-module.exports = { getRandomName, getRandomThoughts, getRandomFriends, getRandomrReactions };
+module.exports = { usernames, emails, getRandomName, getRandomThoughts, getRandomReactions };

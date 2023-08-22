@@ -1,4 +1,4 @@
-// ObjectId() method for converting studentId string into an ObjectId for querying database
+// ObjectId() method for converting userId string into an ObjectId for querying database
 const { ObjectId } = require("mongoose").Types;
 const { User, Thought } = require("../models");
 
@@ -78,18 +78,17 @@ module.exports = {
     }
   },
 
-  // Add an assignment to a student
+  // Add an assignment to a user
   async addFriend(req, res) {
     try {
       console.log("You are adding a friend");
-      console.log(req.body);
       const user = await User.findOneAndUpdate({ _id: req.params.userId }, { $addToSet: { friends: req.params.friendId } }, { new: true });
 
       if (!user) {
         return res.status(404).json({ message: "No user found with that ID :(" });
       }
 
-      res.json(student);
+      res.json(user);
     } catch (err) {
       res.status(500).json(err);
     }
@@ -103,7 +102,7 @@ module.exports = {
         return res.status(404).json({ message: "No user found with that ID :(" });
       }
 
-      res.json(student);
+      res.json(user);
     } catch (err) {
       res.status(500).json(err);
     }
