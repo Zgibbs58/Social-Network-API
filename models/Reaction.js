@@ -21,7 +21,7 @@ const reactionSchema = new Schema(
       // Is this what we need to do for
       // Use a getter method to format the timestamp on query
       get: function () {
-        return Date.now.toLocaleString();
+        return Date.now().toLocaleString();
       },
     },
   },

@@ -28,11 +28,14 @@ connection.once("open", async () => {
 
   // Add courses to the collection and await the results
   for (let i = 0; i < 20; i++) {
+    // const thought =
     await Thought.collection.insertOne({
       thoughtText: getRandomThoughts(),
       username: users[Math.floor(Math.random() * users.length)],
-      reactions: getRandomReactions(),
+      reactions: [getRandomReactions(), getRandomReactions()],
     });
+    // const item = await Thought.findById(thought.insertedId);
+    // console.log(item);
   }
 
   // Log out the seed data to indicate what should appear in the database

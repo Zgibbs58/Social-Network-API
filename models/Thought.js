@@ -14,8 +14,8 @@ const thoughtSchema = new Schema(
       default: Date.now,
       // Is this what we need to do for
       // Use a getter method to format the timestamp on query
-      get: function () {
-        return Date.now.toLocaleString();
+      get: function (value) {
+        return new Date(value).toLocaleString();
       },
     },
     username: {
@@ -26,7 +26,8 @@ const thoughtSchema = new Schema(
   },
   {
     toJSON: {
-      virtuals: true,
+      // virtuals: true,
+      getters: true,
     },
   }
 );

@@ -77,19 +77,16 @@ const getRandomArrItem = (arr) => arr[Math.floor(Math.random() * arr.length)];
 
 // Gets a random full name
 const getRandomName = () => {
-  const randomUsername = getRandomArrItem(usernames);
-  return randomUsername;
+  return getRandomArrItem(usernames);
 };
 
 // Function to generate random assignments that we can add to student object.
 const getRandomThoughts = () => {
-  const randomThought = getRandomArrItem(thoughts);
-  return randomThought;
+  return getRandomArrItem(thoughts);
 };
 
-const getRandomReactions = (int) => {
-  const randomReactions = getRandomArrItem(reactions);
-  return randomReactions;
+const getRandomReactions = () => {
+  return getRandomArrItem(reactions);
 };
 
 // Export the functions for use in seed.js
