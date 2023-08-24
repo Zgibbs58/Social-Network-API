@@ -21,22 +21,22 @@ connection.once("open", async () => {
     users.push(usernames[i]);
   }
 
-  // Add students to the collection and await the results
-  for (let i = 0; i < 20; i++) {
+  // Add users to the collection and await the results
+  for (let i = 0; i < 5; i++) {
     await User.collection.insertOne({ username: users[i], email: emails[i] });
   }
 
   // Add courses to the collection and await the results
-  for (let i = 0; i < 20; i++) {
-    // const thought =
-    await Thought.collection.insertOne({
-      thoughtText: getRandomThoughts(),
-      username: users[Math.floor(Math.random() * users.length)],
-      // reactions: [getRandomReactions(), getRandomReactions()],
-    });
-    // const item = await Thought.findById(thought.insertedId);
-    // console.log(item);
-  }
+  // for (let i = 0; i < 20; i++) {
+  // const thought =
+  // await Thought.collection.insertOne({
+  // thoughtText: getRandomThoughts(),
+  // username: users[Math.floor(Math.random() * users.length)],
+  // reactions: [getRandomReactions(), getRandomReactions()],
+  // });
+  // const item = await Thought.findById(thought.insertedId);
+  // console.log(item);
+  // }
 
   // Log out the seed data to indicate what should appear in the database
   console.table(usernames);

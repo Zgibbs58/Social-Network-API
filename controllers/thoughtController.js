@@ -4,7 +4,7 @@ module.exports = {
   // Get all Thoughts
   async getThoughts(req, res) {
     try {
-      const thoughts = await Thought.find();
+      const thoughts = await Thought.find().select("-__v");
       res.json(thoughts);
     } catch (err) {
       res.status(500).json(err);
@@ -43,6 +43,8 @@ module.exports = {
   async deleteThought(req, res) {
     try {
       const thought = await Thought.findOneAndDelete({ _id: req.params.thoughtId });
+      //   Added to pull thought id from the users thoughts array when deleting thought
+      await User.findOneAndUpdate({ username: thought.username }, { $pull: { thoughts: thought._id } });
 
       if (!thought) {
         return res.status(404).json({ message: "No thought with that ID" });
@@ -53,13 +55,13 @@ module.exports = {
       res.status(500).json(err);
     }
   },
-  //   Update a course
+  //   Update a thought
   async updateThought(req, res) {
     try {
       const thought = await Thought.findOneAndUpdate({ _id: req.params.thoughtId }, { $set: req.body }, { runValidators: true, new: true });
 
       if (!thought) {
-        return res.status(404).json({ message: "No course with this id!" });
+        return res.status(404).json({ message: "No thought with this id!" });
       }
 
       res.json(thought);
@@ -79,6 +81,23 @@ module.exports = {
     } catch (err) {
       console.log(err);
       return res.status(500).json(err);
+    }
+  },
+  // Delete a reaction
+  async deleteReaction(req, res) {
+    try {
+      const thought = await Thought.findOneAndUpdate(
+        { _id: req.params.thoughtId },
+        { $pull: { reactions: { reactionId: req.params.reactionId } } },
+        { new: true }
+      );
+
+      if (!thought) {
+        return res.status(404).json({ message: "No thought with that ID" });
+      }
+      res.json(thought);
+    } catch (err) {
+      res.status(500).json(err);
     }
   },
 };

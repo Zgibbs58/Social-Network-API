@@ -29,7 +29,9 @@ const reactionSchema = new Schema(
     toJSON: {
       virtuals: true,
     },
-    id: false,
+    // id: false,
+    // had to set this to false to not get a _id and just get reactionId
+    _id: false,
   }
 );
 
