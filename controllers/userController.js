@@ -48,7 +48,7 @@ module.exports = {
         return res.status(404).json({ message: "No such user exists" });
       }
 
-      const thoughts = await Thought.deleteMany({ username: user.username });
+      const thoughts = await Thought.deleteMany({ _id: { $in: user.thoughts } });
 
       if (!thoughts) {
         return res.status(404).json({
@@ -56,7 +56,7 @@ module.exports = {
         });
       }
 
-      res.json({ message: "User successfully deleted" });
+      res.json({ message: "User and thoughts successfully deleted" });
     } catch (err) {
       console.log(err);
       res.status(500).json(err);
@@ -72,7 +72,7 @@ module.exports = {
         return res.status(404).json({ message: "No user with this id!" });
       }
 
-      res.json(course);
+      res.json(user);
     } catch (err) {
       res.status(500).json(err);
     }
