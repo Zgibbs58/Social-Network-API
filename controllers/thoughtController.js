@@ -53,18 +53,18 @@ module.exports = {
       res.status(500).json(err);
     }
   },
-  // Update a course
-  //   async updateCourse(req, res) {
-  //     try {
-  //       const course = await Course.findOneAndUpdate({ _id: req.params.courseId }, { $set: req.body }, { runValidators: true, new: true });
+  //   Update a course
+  async updateThought(req, res) {
+    try {
+      const thought = await Thought.findOneAndUpdate({ _id: req.params.thoughtId }, { $set: req.body }, { runValidators: true, new: true });
 
-  //       if (!course) {
-  //         return res.status(404).json({ message: "No course with this id!" });
-  //       }
+      if (!thought) {
+        return res.status(404).json({ message: "No course with this id!" });
+      }
 
-  //       res.json(course);
-  //     } catch (err) {
-  //       res.status(500).json(err);
-  //     }
-  //   },
+      res.json(thought);
+    } catch (err) {
+      res.status(500).json(err);
+    }
+  },
 };
