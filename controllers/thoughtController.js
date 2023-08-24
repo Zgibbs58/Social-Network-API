@@ -28,6 +28,11 @@ module.exports = {
   async createThought(req, res) {
     try {
       const thought = await Thought.create(req.body);
+      const user = await User.findOneAndUpdate({ _id: req.body.userId }, { $push: { thoughts: thought._id } }, { new: true });
+
+      if (!user) {
+        return res.status(404).json({ message: "No user with that ID" });
+      }
       res.json(thought);
     } catch (err) {
       console.log(err);
@@ -43,25 +48,23 @@ module.exports = {
         return res.status(404).json({ message: "No thought with that ID" });
       }
 
-      await Thought.deleteMany({ _id: { $in: thought.reactions } });
-
       res.json({ message: "Thought and reactions deleted!" });
     } catch (err) {
       res.status(500).json(err);
     }
   },
   // Update a course
-  async updateCourse(req, res) {
-    try {
-      const course = await Course.findOneAndUpdate({ _id: req.params.courseId }, { $set: req.body }, { runValidators: true, new: true });
+  //   async updateCourse(req, res) {
+  //     try {
+  //       const course = await Course.findOneAndUpdate({ _id: req.params.courseId }, { $set: req.body }, { runValidators: true, new: true });
 
-      if (!course) {
-        return res.status(404).json({ message: "No course with this id!" });
-      }
+  //       if (!course) {
+  //         return res.status(404).json({ message: "No course with this id!" });
+  //       }
 
-      res.json(course);
-    } catch (err) {
-      res.status(500).json(err);
-    }
-  },
+  //       res.json(course);
+  //     } catch (err) {
+  //       res.status(500).json(err);
+  //     }
+  //   },
 };

@@ -32,7 +32,7 @@ connection.once("open", async () => {
     await Thought.collection.insertOne({
       thoughtText: getRandomThoughts(),
       username: users[Math.floor(Math.random() * users.length)],
-      reactions: [getRandomReactions(), getRandomReactions()],
+      // reactions: [getRandomReactions(), getRandomReactions()],
     });
     // const item = await Thought.findById(thought.insertedId);
     // console.log(item);
