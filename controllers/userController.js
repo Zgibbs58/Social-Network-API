@@ -65,8 +65,9 @@ module.exports = {
   // Update a user
   async updateUser(req, res) {
     try {
+      const oldUserData = await User.findById({ _id: req.params.userId });
       const user = await User.findOneAndUpdate({ _id: req.params.userId }, { $set: req.body }, { runValidators: true, new: true });
-
+      await Thought.updateMany({ username: oldUserData.username }, { $set: { username: req.body.username } });
       if (!user) {
         return res.status(404).json({ message: "No user with this id!" });
       }
