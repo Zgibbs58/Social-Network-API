@@ -78,7 +78,7 @@ module.exports = {
     }
   },
 
-  // Add an assignment to a user
+  // Add a friend to a user
   async addFriend(req, res) {
     try {
       console.log("You are adding a friend");

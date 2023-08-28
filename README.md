@@ -56,7 +56,7 @@ This API allows users to interact with the social network application by providi
 ## Walkthrough Video
 ![Walkthrough Video](assets/socialNetworkGif.gif)
 
-[Walkthrough Video](https://drive.google.com/file/d/1uvS3PZdDV58ylZ-Pkvv5MQIHnYTmvfL3/view)
+[Walkthrough Video](https://drive.google.com/file/d/1KzRtgUjEirJhVaAXsvVcwoQJADYw-nzL/view)
 
 ## License
 This project is licensed under the [MIT](https://opensource.org/licenses/MIT) License.
