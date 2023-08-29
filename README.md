@@ -8,21 +8,31 @@ This is a an API for a social network web application where users can share thei
 - [Installation](#installation)
 - [Usage](#usage)
 - [API Routes](#api-routes)
+- [Technologies](#technologies)
 - [Walkthrough Video](#walkthrough-video)
 - [License](#license)
 
 ## Installation
+
+If you do not have MongoDB Community Edition installed, you will need to do so by following the instructions at one of the links below:
+
+[MacOS](https://www.mongodb.com/docs/manual/tutorial/install-mongodb-on-os-x/)
+
+[Windows](https://www.mongodb.com/docs/manual/tutorial/install-mongodb-on-windows/)
+
 To set up the project and run it locally on your machine, follow these steps:
 
 1. Clone this repository to your local machine.
 
-2. Install the required dependencies using:
+2. Navigate to the project directory.
+
+3. Install the required dependencies using:
 
 ```
 npm install
 ```
 
-3. Start the server:
+4. Start the server:
 
 ```
 npm start
@@ -40,7 +50,7 @@ This API allows users to interact with the social network application by providi
     - PUT to update a user
     - DELETE to remove a user
 - `/api/users/:userId/friends/:friendId`
-    - POST to add a new friend
+    - POST a new friend
     - DELETE to remove a friend
 - `/api/thoughts`
     - GET all thoughts
@@ -51,7 +61,17 @@ This API allows users to interact with the social network application by providi
     - DELETE to remove a thought
 - `/api/thoughts/:thoughtId/reactions`
     - POST to create a reaction
+- `/api/thoughts/:thoughtId/reactions/:reactionId`
     - DELETE to remove a reaction
+
+
+## Technologies
+[Express](https://www.npmjs.com/package/express)
+
+[MongoDB](https://www.npmjs.com/package/mongodb)
+
+[Mongoose](https://www.npmjs.com/package/mongoose)
+
 
 ## Walkthrough Video
 ![Walkthrough Video](assets/socialNetworkGif.gif)
